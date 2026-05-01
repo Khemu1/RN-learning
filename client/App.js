@@ -1,20 +1,33 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import RootNavigator from "./src/navigation";
+import {
+  useFonts,
+  Nunito_400Regular,
+  Nunito_500Medium,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+} from "@expo-google-fonts/nunito";
+
+// @ts-ignore
+
+import "./global.css";
+import { View } from "react-native";
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Nunito_400Regular,
+    Nunito_500Medium,
+    Nunito_600SemiBold,
+    Nunito_700Bold,
+  });
+
+  if (!fontsLoaded) return <View />;
+
   return (
-    <View style={styles.container}>
-      <Text style={{ textAlign: "center" }}>hello updated there !</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1 }}>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

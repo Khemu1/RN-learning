@@ -1,0 +1,13 @@
+{
+  "javascript.validate.enable": true,
+  "javascript.suggestionActions.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.suggest.preview": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.classAttributes": ["className"],
+  "tailwindCSS.experimental.classRegex": [
+    ["className\\s*=\\s*[\"'`]([^\"'`]*)[\"'`]"]
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "jsx": "react-native",
+    "moduleResolution": "bundler",
+    "checkJs": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strict": false
+  },
+  "include": ["src/**/*", "App.js"],
+  "exclude": ["node_modules"]
+}
