@@ -3,7 +3,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { View, Pressable, TextInput } from "react-native";
 import Text from "@/components/ui/Text";
-import { colors, formStyles } from "@/theme";
+import { colors } from "@/theme";
+import { formStyles } from "@/styles/forms";
 
 export default function LoginScreen() {
   /** @type {import('@/types/navigation').AuthNavigation} */
