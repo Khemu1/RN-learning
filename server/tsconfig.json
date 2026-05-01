@@ -19,6 +19,8 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
+    "types": ["node", "jest"],
+    "typeRoots": ["./src/types", "./node_modules/@types"],
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   }

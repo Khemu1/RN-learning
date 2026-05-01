@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={{ textAlign: "center" }}>hello updated there hehe !</Text>
+      <Text style={{ textAlign: "center" }}>hello updated there !</Text>
       <StatusBar style="auto" />
     </View>
   );
