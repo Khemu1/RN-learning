@@ -1,9 +1,9 @@
-import { IsOptional, IsString, Min } from 'class-validator';
+import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class CreateTodoDto {
   @IsString()
-  @Min(3)
-  @Min(25)
+  @MinLength(3)
+  @MaxLength(25)
   title!: string;
   @IsString()
   @IsOptional()

@@ -1,11 +1,10 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AuthStack from "./AuthStack";
 import AppStack from "./AppStack";
-
-const Stack = createNativeStackNavigator();
+import { useUserStore } from "@/stores/user.store";
 
 export default function RootNavigator() {
-  const isLoggedIn = false;
+  const user = useUserStore((state) => state.user);
+  console.log("user", user);
 
-  return isLoggedIn ? <AppStack /> : <AuthStack />;
+  return user?.id && user.token ? <AppStack /> : <AuthStack />;
 }

@@ -1,10 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { View, Pressable, TextInput } from "react-native";
+import { View, Pressable, TextInput, ActivityIndicator } from "react-native";
 import Text from "@/components/ui/Text";
 import { colors } from "@/theme";
 import { formStyles } from "@/styles/forms";
+import { useLoginUser } from "@/hooks/auth.hooks";
 
 export default function LoginScreen() {
   /** @type {import('@/types/navigation').AuthNavigation} */
@@ -29,6 +30,12 @@ export default function LoginScreen() {
           borderColor: colors.border,
         },
   ];
+
+  const { mutateAsync: signin, isPending } = useLoginUser();
+
+  const handleSignin = async () => {
+    await signin({ ...fields }, {});
+  };
 
   return (
     <View className="flex-1 justify-center bg-background px-6">
@@ -100,10 +107,18 @@ export default function LoginScreen() {
       </View>
 
       {/* Button */}
-      <Pressable className="bg-primary rounded-xl py-3 mb-4">
-        <Text className="!text-primary-light font-bold text-center text-base">
-          Log in
-        </Text>
+      <Pressable
+        className="bg-primary rounded-xl py-3 mb-4"
+        disabled={isPending}
+        onPress={handleSignin}
+      >
+        {isPending ? (
+          <ActivityIndicator size="small" color={"white"} />
+        ) : (
+          <Text className="!text-primary-light font-bold text-center text-base">
+            Log in
+          </Text>
+        )}
       </Pressable>
 
       {/* Footer */}

@@ -7,6 +7,7 @@ export type AuthStackParams = {
 
 export type AppStackParams = {
   Tasks: undefined;
+  "New-Task": undefined;
 };
 
 export type AuthNavigation = NativeStackNavigationProp<AuthStackParams>;

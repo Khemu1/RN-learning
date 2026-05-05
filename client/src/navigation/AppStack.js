@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TasksScreen from "@/screens/auth/app/TasksScreen";
+import NewTask from "@/screens/auth/app/NewTask";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function AppStack() {
       }}
     >
       <Stack.Screen name="Tasks" component={TasksScreen} />
+      <Stack.Screen name="New-Task" component={NewTask} />
     </Stack.Navigator>
   );
 }

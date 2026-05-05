@@ -5,6 +5,8 @@ import { View, Pressable, TextInput } from "react-native";
 import Text from "@/components/ui/Text";
 import { formStyles } from "@/styles/forms";
 import { colors } from "@/theme";
+import { useSignupUser } from "../../hooks/auth.hooks";
+import { ActivityIndicator } from "react-native";
 
 const getStrength = (pw) => {
   let score = 0;
@@ -34,6 +36,7 @@ export default function SignupScreen() {
   const navigation = useNavigation();
 
   const [focused, setFocused] = useState(null);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const strength = getStrength(password);
@@ -51,6 +54,11 @@ export default function SignupScreen() {
         },
   ];
 
+  const { isPending, mutateAsync: signup } = useSignupUser();
+
+  const handleSignup = async () => {
+    await signup({ email, password }, {});
+  };
   return (
     <View className="flex-1 justify-center bg-background px-6">
       {/* Logo */}
@@ -96,6 +104,8 @@ export default function SignupScreen() {
             onFocus={() => setFocused("email")}
             onBlur={() => setFocused(null)}
             style={inputStyle("email")}
+            value={email}
+            onChangeText={setEmail}
           />
         </View>
 
@@ -151,10 +161,18 @@ export default function SignupScreen() {
       </View>
 
       {/* Button */}
-      <Pressable className="bg-primary rounded-xl py-3 mb-4">
-        <Text className="!text-primary-light font-bold text-center text-base">
-          Create account
-        </Text>
+      <Pressable
+        className="bg-primary rounded-xl py-3 mb-4"
+        disabled={isPending}
+        onPress={handleSignup}
+      >
+        {isPending ? (
+          <ActivityIndicator size="small" color={"white"} />
+        ) : (
+          <Text className="!text-primary-light font-bold text-center text-base">
+            Create account
+          </Text>
+        )}
       </Pressable>
 
       {/* Terms */}

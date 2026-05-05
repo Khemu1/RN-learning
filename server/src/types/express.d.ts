@@ -1,12 +1,11 @@
-// src/types/express.d.ts
+// @/types/express.d.ts
 
 declare global {
   namespace Express {
     interface Request {
-      session?: {
-        userId?: number;
+      user?: {
+        id: number;
       };
-      userId?: number;
     }
   }
 }
