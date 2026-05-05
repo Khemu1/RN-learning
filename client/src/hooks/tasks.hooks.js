@@ -22,6 +22,11 @@ export const useGetTasks = (user_id) => {
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
+    /**
+     *
+     * @param {import('@/types/index').NewTodo} task - {title, description}
+     * @returns
+     */
     mutationFn: async (task) => {
       const response = await createTask(task);
       return response;
@@ -37,6 +42,11 @@ export const useCreateTask = () => {
 export const useUpdateTask = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
+    /**
+     *
+     * @param {import('@/types/index').NewTodo} task - {title, description}
+     * @returns
+     */
     mutationFn: async (task) => {
       const response = await updateTask(task);
       return response;
@@ -52,8 +62,12 @@ export const useUpdateTask = () => {
 export const useDeleteTask = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
+    /**
+     *
+     * @param {number} id
+     */
     mutationFn: async (id) => {
-      const response = await deleteTask(id);
+      await deleteTask(id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -66,8 +80,12 @@ export const useDeleteTask = () => {
 export const useToggleCompletion = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
+    /**
+     *
+     * @param {number} id
+     */
     mutationFn: async (id) => {
-      const response = await toggleCompletion(id);
+      await toggleCompletion(id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });

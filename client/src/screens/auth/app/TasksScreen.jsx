@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Text from "@/components/ui/Text";
 import { colors } from "@/theme";
-import UserDialog from "@/components/ui/UserDialog";
 import { useDialogStore } from "@/stores/dialog.store";
 import { useNavigation } from "@react-navigation/native";
 import TaskItem from "@/components/tasks/TaskItem";

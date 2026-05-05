@@ -13,7 +13,15 @@ const scrypt = promisify(_scrypt);
 @Injectable()
 export class AuthService {
   constructor(private usersService: UsersService) {}
-  async signup({ email, password }: { email: string; password: string }) {
+  async signup({
+    email,
+    password,
+    username,
+  }: {
+    email: string;
+    password: string;
+    username: string;
+  }) {
     const foundUser = await this.usersService.findUsersByEmail(email);
     if (foundUser.length > 0) {
       throw new BadRequestException('Email already exists');
@@ -23,6 +31,7 @@ export class AuthService {
     const res = salt + '.' + hash.toString('hex');
     return await this.usersService.createUser({
       email,
+      username,
       password: res,
     });
   }

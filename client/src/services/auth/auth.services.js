@@ -28,14 +28,16 @@ export const login = async (email, password) => {
  *
  * @param {string} email
  * @param {string} password
+ * @param {string} username
  * @returns
  */
-export const register = async (email, password) => {
+export const register = async (email, password, username) => {
   try {
-    const response = await fetch(`${getApiUrl()}auth/register`, {
+    console.log("register ", email, password, username);
+    const response = await fetch(`${getApiUrl()}auth/signup`, {
       method: "POST",
       headers: getAuthHeaders(),
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, username }),
     });
 
     const data = await response.json();

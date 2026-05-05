@@ -6,6 +6,11 @@ export const useLoginUser = () => {
   const { setUser } = useUserStoreActions();
   const [apiError, setApiError] = useState(null);
   const mutation = useMutation({
+    /**
+     *
+     * @param {import('@/types/index').LoginUser} user
+     * @returns
+     */
     mutationFn: async (user) => {
       const response = await login(user.email, user.password);
       setUser(response);
@@ -30,8 +35,13 @@ export const useSignupUser = () => {
   const { setUser } = useUserStoreActions();
   const [apiError, setApiError] = useState(null);
   const mutation = useMutation({
+    /**
+     *
+     * @param {import('@/types/index').NewUser} user
+     * @returns
+     */
     mutationFn: async (user) => {
-      const response = await register(user.email, user.password);
+      const response = await register(user.email, user.password, user.username);
       setUser(response);
       console.log("register response", response); // ✅ what does this return?
 

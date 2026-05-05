@@ -15,12 +15,19 @@ import { useCreateTask } from "@/hooks/tasks.hooks";
 import { useNavigation } from "@react-navigation/native";
 
 const NewTask = () => {
+  /** @type {import('@/types/navigation').AppNavigation} */
+
   const navigation = useNavigation();
   const [task, setTask] = useState({ title: "", description: "" });
   const [focusedField, setFocusedField] = useState(null);
 
   const { mutateAsync: createTask, isPending } = useCreateTask();
 
+  /**
+   *
+   * @param {string} field
+   * @returns
+   */
   const inputStyle = (field) => ({
     borderWidth: 1,
     borderColor: focusedField === field ? colors.textMuted : colors.border,
@@ -32,24 +39,22 @@ const NewTask = () => {
   });
 
   const handleSubmit = async () => {
-    console.log("handleSubmit ,", task);
     await createTask(task, {
       onSuccess: () => {
-        navigation.navigate("Tasks");
+        navigation.navigate("Main");
       },
     });
   };
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: colors.background }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView
         contentContainerStyle={{
-          paddingHorizontal: 20,
-          paddingTop: 32,
-          paddingBottom: 40,
+          padding: 20,
+          paddingTop: 60,
         }}
         keyboardShouldPersistTaps="handled"
       >

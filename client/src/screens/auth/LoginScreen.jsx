@@ -8,14 +8,14 @@ import { formStyles } from "@/styles/forms";
 import { useLoginUser } from "@/hooks/auth.hooks";
 
 export default function LoginScreen() {
-  /** @type {import('@/types/navigation').AuthNavigation} */
+  /** @type {import('@/types/navigation').AppNavigation} */
 
   const navigation = useNavigation();
 
   const [focused, setFocused] = useState(null);
   const [fields, setFields] = useState({
-    email: "",
-    password: "",
+    email: "test@gmail.com",
+    password: "123456",
   });
 
   const inputStyle = (field) => [
@@ -34,7 +34,7 @@ export default function LoginScreen() {
   const { mutateAsync: signin, isPending } = useLoginUser();
 
   const handleSignin = async () => {
-    await signin({ ...fields }, {});
+    await signin({ ...fields });
   };
 
   return (

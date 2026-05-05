@@ -1,5 +1,6 @@
 import LoginScreen from "@/screens/auth/LoginScreen";
 import SignupScreen from "@/screens/auth/SignupScreen";
+import { colors } from "@/theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -12,7 +13,7 @@ export default function RootNavigator() {
         headerShown: false,
         animation: "none",
         contentStyle: {
-          backgroundColor: "#F8FAFF",
+          backgroundColor: colors.background,
         },
       }}
     >

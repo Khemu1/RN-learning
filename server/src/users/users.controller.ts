@@ -15,7 +15,7 @@ import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
 import { Serialize } from '@/interceptors/serialize.interceptor';
 import { CreateUserDto, UpdateUserDto } from './dtos/create-user.dto';
-import { UserDto } from './dtos/user.dto';
+import { LoginUserDto, UserDto } from './dtos/user.dto';
 import { AuthGuard } from '@/gaurds/auth.guard';
 import { JwtService } from '@nestjs/jwt';
 
@@ -31,17 +31,17 @@ export class UsersController {
   @Post('/signup')
   @HttpCode(201)
   async createUser(@Body() user: CreateUserDto) {
-    const { id, email } = await this.authService.signup(user);
+    const { id, email, username } = await this.authService.signup(user);
     const token = this.jwtService.sign({ id });
-    return { id, email, token };
+    return { id, email, username, token };
   }
 
   @Post('/login')
   @HttpCode(200)
-  async login(@Body() user: CreateUserDto) {
-    const { id, email } = await this.authService.login(user);
+  async login(@Body() user: LoginUserDto) {
+    const { id, email, username } = await this.authService.login(user);
     const token = this.jwtService.sign({ id });
-    return { id, email, token };
+    return { id, email, username, token };
   }
 
   @HttpCode(204)

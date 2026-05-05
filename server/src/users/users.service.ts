@@ -11,10 +11,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
-  async createUser(data: { email: string; password: string }) {
+  async createUser(data: {
+    email: string;
+    password: string;
+    username: string;
+  }) {
     const user = this.repo.create({
       email: data.email,
       password: data.password,
+      username: data.username,
     });
     return await this.repo.save(user);
   }

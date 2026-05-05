@@ -32,12 +32,13 @@ const strengthLabel = (score) => {
 };
 
 export default function SignupScreen() {
-  /** @type {import('@/types/navigation').AuthNavigation} */
+  /** @type {import('@/types/navigation').AppNavigation} */
   const navigation = useNavigation();
 
   const [focused, setFocused] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("123456");
+  const [username, setUsername] = useState("max_max");
 
   const strength = getStrength(password);
 
@@ -57,7 +58,7 @@ export default function SignupScreen() {
   const { isPending, mutateAsync: signup } = useSignupUser();
 
   const handleSignup = async () => {
-    await signup({ email, password }, {});
+    await signup({ email, password, username }, {});
   };
   return (
     <View className="flex-1 justify-center bg-background px-6">
@@ -90,6 +91,24 @@ export default function SignupScreen() {
 
       {/* Fields */}
       <View className="gap-3 mb-4">
+        <View style={formStyles.container}>
+          <Text className="text-xs font-bold text-primary tracking-widest">
+            USERNAME
+          </Text>
+
+          <TextInput
+            placeholder="mad_max"
+            keyboardType="default"
+            autoCapitalize="none"
+            placeholderTextColor={colors.textMuted}
+            onFocus={() => setFocused("email")}
+            onBlur={() => setFocused(null)}
+            style={inputStyle("username")}
+            value={username}
+            onChangeText={setUsername}
+          />
+        </View>
+
         {/* EMAIL */}
         <View style={formStyles.container}>
           <Text className="text-xs font-bold text-primary tracking-widest">

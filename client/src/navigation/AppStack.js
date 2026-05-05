@@ -1,22 +1,21 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import TasksScreen from "@/screens/auth/app/TasksScreen";
+import MainTabs from "@/navigation/MainTabs";
 import NewTask from "@/screens/auth/app/NewTask";
+import { colors } from "@/theme";
 
 const Stack = createNativeStackNavigator();
 
 export default function AppStack() {
   return (
     <Stack.Navigator
-      id="app"
       screenOptions={{
         headerShown: false,
-
-        contentStyle: {
-          backgroundColor: "#F8FAFF",
-        },
+        animation: "none",
       }}
+      id="app-stack"
     >
-      <Stack.Screen name="Tasks" component={TasksScreen} />
+      <Stack.Screen name="Main" component={MainTabs} />
+
       <Stack.Screen name="New-Task" component={NewTask} />
     </Stack.Navigator>
   );

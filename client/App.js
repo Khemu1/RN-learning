@@ -15,6 +15,7 @@ import { View } from "react-native";
 import StoreProvider from "@/components/providers/StoreProvider";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
+import { colors } from "@/theme";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,15 +29,13 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={{ flex: 1, backgroundColor: "#F8FAFF" }}>
-        <NavigationContainer>
-          <QueryClientProvider client={queryClient}>
-            <StoreProvider>
-              <RootNavigator />
-            </StoreProvider>
-          </QueryClientProvider>
-        </NavigationContainer>
-      </View>
+      <NavigationContainer>
+        <QueryClientProvider client={queryClient}>
+          <StoreProvider>
+            <RootNavigator />
+          </StoreProvider>
+        </QueryClientProvider>
+      </NavigationContainer>
     </GestureHandlerRootView>
   );
 }

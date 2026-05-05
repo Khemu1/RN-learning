@@ -11,6 +11,7 @@ const EditTaskDialog = ({ task }) => {
   const { mutateAsync: updateTask, isPending } = useUpdateTask();
 
   const [editingTask, setEditingTask] = useState({
+    id: 0,
     title: "",
     description: "",
   });
@@ -18,6 +19,7 @@ const EditTaskDialog = ({ task }) => {
   useEffect(() => {
     if (task) {
       setEditingTask({
+        id: task.id,
         title: task.title || "",
         description: task.description || "",
       });
@@ -28,7 +30,6 @@ const EditTaskDialog = ({ task }) => {
     try {
       await updateTask(
         {
-          id: task.id,
           ...editingTask,
         },
         {
