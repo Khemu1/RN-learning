@@ -39,11 +39,18 @@ const NewTask = () => {
   });
 
   const handleSubmit = async () => {
-    await createTask(task, {
-      onSuccess: () => {
-        navigation.navigate("Main");
+    await createTask(
+      {
+        title: task.title,
+        description: task.description,
       },
-    });
+      {
+        onSuccess: () => {
+          setTask({ title: "", description: "" });
+          navigation.navigate("Main");
+        },
+      },
+    );
   };
 
   return (

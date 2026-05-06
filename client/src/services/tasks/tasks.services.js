@@ -41,13 +41,20 @@ export const createTask = async (task) => {
     throw error;
   }
 };
-
+/**
+ *
+ * @param {import('@/types/index').UpdateTodo} task
+ * @returns
+ */
 export const updateTask = async (task) => {
   try {
     const response = await fetch(`${getApiUrl()}todos/${task.id}`, {
       method: "PUT",
       headers: getAuthHeaders(),
-      body: JSON.stringify(task),
+      body: JSON.stringify({
+        title: task.title,
+        description: task.description,
+      }),
     });
 
     const data = await response.json();

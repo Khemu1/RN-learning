@@ -30,10 +30,17 @@ const EditTaskDialog = ({ task }) => {
     try {
       await updateTask(
         {
-          ...editingTask,
+          title: editingTask.title,
+          description: editingTask.description,
+          id: task.id,
         },
         {
           onSuccess: () => {
+            setEditingTask({
+              id: 0,
+              title: "",
+              description: "",
+            });
             close();
           },
         },

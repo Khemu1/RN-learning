@@ -44,7 +44,7 @@ export const useUpdateTask = () => {
   const mutation = useMutation({
     /**
      *
-     * @param {import('@/types/index').NewTodo} task - {title, description}
+     * @param {import('@/types/index').UpdateTodo} task - {title, description}
      * @returns
      */
     mutationFn: async (task) => {

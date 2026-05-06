@@ -17,8 +17,19 @@ export interface NewUser {
   password: string;
 }
 
-export interface LoginUser extends Omit<NewUser, "username"> {}
+export interface Todo extends NewTodo {
+  id: number;
+  user_id: number;
+  title: string;
+  description: string;
+  completed: boolean;
+}
 
+export interface UpdateTodo extends NewTodo {
+  id: number;
+}
+
+export interface LoginUser extends Omit<NewUser, "username"> {}
 
 export interface UpdateUser extends Omit<NewUser, "password"> {
   password?: string;
