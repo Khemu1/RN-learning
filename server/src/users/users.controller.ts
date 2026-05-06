@@ -6,10 +6,9 @@ import {
   HttpCode,
   NotFoundException,
   Param,
-  Patch,
   Post,
   UseGuards,
-  Request,
+  Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
@@ -18,6 +17,8 @@ import { CreateUserDto, UpdateUserDto } from './dtos/create-user.dto';
 import { LoginUserDto, UserDto } from './dtos/user.dto';
 import { AuthGuard } from '@/gaurds/auth.guard';
 import { JwtService } from '@nestjs/jwt';
+import { CurrentUser } from '@/decorators/current-user.decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
 @Serialize(UserDto)
@@ -58,16 +59,19 @@ export class UsersController {
     return user;
   }
 
-  @Patch('/:id')
+  @Put()
   @UseGuards(AuthGuard)
-  async updateUser(@Param() data: { id: string }, @Body() user: UpdateUserDto) {
-    return await this.userService.updateUser(+data.id, user);
+  async updateUser(
+    @Body() user: UpdateUserDto,
+    @CurrentUser() currentUser: User,
+  ) {
+    return await this.userService.updateUser(+currentUser.id, user);
   }
 
-  @Delete('/:id/remove')
+  @Delete()
   @HttpCode(204)
   @UseGuards(AuthGuard)
-  async removeUser(@Param() data: { id: string }) {
-    await this.userService.removeUser(+data.id);
+  async removeUser(@CurrentUser() currentUser: User) {
+    await this.userService.removeUser(+currentUser.id);
   }
 }

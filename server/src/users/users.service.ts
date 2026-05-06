@@ -6,6 +6,9 @@ import {
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { scrypt as _scrypt, randomBytes } from 'crypto';
+import { promisify } from 'util';
+const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class UsersService {
@@ -60,10 +63,18 @@ export class UsersService {
     }
     if (data.email) {
       const isEmailTaken = await this.isEmailTaken(data.email);
-      console.log('isEmailTaken', isEmailTaken);
       if (isEmailTaken && isEmailTaken.id !== id) {
         throw new BadRequestException('Email already exists');
       }
+    }
+    if (data.password) {
+      if (data.password.length < 3) {
+        throw new BadRequestException('Password must be at least 6 characters');
+      }
+      const salt = randomBytes(8).toString('hex');
+      const hash = (await scrypt(data.password, salt, 32)) as Buffer;
+      const res = salt + '.' + hash.toString('hex');
+      data.password = res;
     }
     Object.assign(foundUser, data);
     await this.repo.save(foundUser);

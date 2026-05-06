@@ -14,11 +14,13 @@ export const login = async (email, password) => {
       body: JSON.stringify({ email, password }),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
       throw new Error(data.message?.[0] || data.message || "Request failed");
     }
 
-    return response.json();
+    return data;
   } catch (error) {
     console.log(error);
     throw error;
